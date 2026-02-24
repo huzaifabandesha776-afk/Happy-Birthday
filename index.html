@@ -4,37 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Fiza 🎂</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+        *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
         body{
-            background: linear-gradient(-45deg, #000428 0%, #004e92 25%, #1a0033 50%, #330066 75%);
-            background-size: 400% 400%;
-            animation: gradientShift 12s ease infinite;
-            color:#fff;
-            min-height:100vh;
-            overflow-x:hidden;
+            background: #1a0033;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
         }
-        @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
         
-        .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,rgba(0,0,0,0.4)0%,rgba(0,0,0,0.8)100%);z-index:1;}
+        .container{max-width:500px;width:90%;}
         
-        .container{padding:15px;position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+        .title{
+            font-size: 2.5rem;
+            color: #ffd93d;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
         
-        .title{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;background:linear-gradient(45deg,#ff6b9d,#ffd93d,#ff6b9d);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:glow 3s ease-in-out infinite alternate;margin-bottom:10px;}
-        .name{font-size:clamp(2rem,7vw,3.5rem);color:#ff5fa2;margin:10px 0;text-shadow:0 0 20px rgba(255,95,162,0.8);font-weight:800;line-height:1.1;}
+        .name{
+            font-size: 3rem;
+            color: #ff6b9d;
+            margin: 20px 0;
+            font-weight: bold;
+        }
         
-        .eyes{font-size:clamp(3rem,12vw,6rem);margin:20px 0;animation:blink 3s infinite;}
-        @keyframes blink{0%,90%,100%{transform:scaleY(1);}95%{transform:scaleY(0.1);}}
+        .eyes{
+            font-size: 4rem;
+            margin: 20px 0;
+        }
         
-        .stage{display:none;flex-direction:column;justify-content:center;align-items:center;min-height:70vh;padding:20px;}
-        .stage.active{display:flex;}
+        .stage{display:none;}
+        .stage.active{display:block;}
         
-        .card{background:linear-gradient(145deg,rgba(255,255,255,0.15),rgba(255,255,255,0.05));backdrop-filter:blur(20px);border-radius:25px;padding:25px;margin:15px auto;max-width:90vw;width:100%;border:1px solid rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(0,0,0,0.4);}
-        .card.arabic{font-family:'Noto Naskh Arabic',serif;font-size:clamp(1.4rem,4vw,1.8rem);line-height:1.6;color:#fff8dc;text-shadow:1px 1px 2px rgba(0,0,0,0.5);}
+        .card{
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid #fff;
+        }
         
-        .btn{margin:20px auto;padding:16px 35px;border-radius:50px;border:none;background:linear-gradient(45deg,#ff4d8d,#ff9bd5,#ffd93d);color:#fff;font-size:clamp(1rem,3.5vw,1.2rem);font-weight:700;cursor:pointer;transition:all 0.4s;box-shadow:0 8px 25px rgba(255,77,141,0.4);position:relative;overflow:hidden;display:block;width:90%;max-width:350px;}
-        .btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 15px 35px rgba(255,77,141,0.6);}
-        .btn:active{transform:translateY(-1px);}
+        .btn{
+            background: linear-gradient(45deg, #ff6b9d, #ffd93d);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            width: 90%;
+            max-width: 350px;
+        }
         
-        .progress{dis
+        .progress{display:flex;gap:10px;justify-content:center;margin:20px 0;}
+        .progress-dot{width:12px;height:12px;border-radius:50%;background:#ff6b9d;}
+        .progress-dot.active{background:#ffd93d;transform:scale(1.5);}
+        
+        .arabic{font-size:1.8rem;color:#fff8dc;line-height:1.6;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- STAGE 0: I SEE YOU -->
+        <div id="stage0" class="stage active">
+            <div class="eyes">👁️👁️</div>
+            <div class="title">I SEE YOU Fiza!</div>
+            <div class="card">
+                <div style="font-size:1.5rem;color:#ffd93d;margin-bottom:15px;">
+                    Huzaifa caught you! 😍
+                </div>
+                <div style="font-size:1.2rem;">
+                    Special gift for world's best smile 💝<br>
+                    <span style="color:#ff9bd5;">Ready to be my BIG FAN?</span>
+                </div>
+            </div>
+            <button class="btn" onclick="nextStage(1)">💖 YES I'm Your BIG FAN! 💖</button>
+        </div>
+        
+        <!-- STAGE 1: HAPPY BIRTHDAY -->
+        <div id="stage1" class="stage">
+            <div class="title">🎉 HAPPY BIRTHDAY

@@ -7,28 +7,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-        body{background:#000;color:#fff;height:100vh;overflow:hidden;display:flex;justify-content:center;align-items:center;text-align:center;}
+        body{background:#000;color:#fff;min-height:100vh;overflow-x:hidden;}
         
         .bg-video{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:brightness(0.5);}
         .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,rgba(0,0,0,0)0%,rgba(0,0,0,0.8)100%);z-index:-1;}
         
-        .container{padding:20px;z-index:1;max-width:600px;}
-        .title{font-size:2.8rem;font-weight:800;background:linear-gradient(45deg,#ff6b9d,#ffd93d,#ff6b9d);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:glow 3s ease-in-out infinite alternate;}
-        .name{font-size:3.5rem;color:#ff5fa2;margin:15px 0;text-shadow:0 0 20px rgba(255,95,162,0.8);font-weight:800;}
+        .container{padding:15px;position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
         
-        .stage{display:none;flex-direction:column;justify-content:center;align-items:center;}
+        .title{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;background:linear-gradient(45deg,#ff6b9d,#ffd93d,#ff6b9d);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:glow 3s ease-in-out infinite alternate;margin-bottom:10px;}
+        .name{font-size:clamp(2rem,7vw,3.5rem);color:#ff5fa2;margin:10px 0;text-shadow:0 0 20px rgba(255,95,162,0.8);font-weight:800;line-height:1.1;}
+        
+        .stage{display:none;flex-direction:column;justify-content:center;align-items:center;min-height:70vh;padding:20px;}
         .stage.active{display:flex;}
         
-        .card{background:linear-gradient(145deg,rgba(255,255,255,0.15),rgba(255,255,255,0.05));backdrop-filter:blur(20px);border-radius:25px;padding:30px;margin:20px auto;max-width:500px;border:1px solid rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(0,0,0,0.4);}
-        .card.arabic{font-family:'Noto Naskh Arabic',serif;font-size:1.8rem;line-height:1.6;color:#fff8dc;text-shadow:1px 1px 2px rgba(0,0,0,0.5);}
+        .card{background:linear-gradient(145deg,rgba(255,255,255,0.15),rgba(255,255,255,0.05));backdrop-filter:blur(20px);border-radius:25px;padding:25px;margin:15px auto;max-width:90vw;width:100%;border:1px solid rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(0,0,0,0.4);}
+        .card.arabic{font-family:'Noto Naskh Arabic',serif;font-size:clamp(1.4rem,4vw,1.8rem);line-height:1.6;color:#fff8dc;text-shadow:1px 1px 2px rgba(0,0,0,0.5);}
         
-        .btn{margin:25px auto;padding:18px 45px;border-radius:50px;border:none;background:linear-gradient(45deg,#ff4d8d,#ff9bd5,#ffd93d);color:#fff;font-size:1.2rem;font-weight:700;cursor:pointer;transition:all 0.4s;box-shadow:0 8px 25px rgba(255,77,141,0.4);position:relative;overflow:hidden;}
+        .btn{margin:20px auto;padding:16px 35px;border-radius:50px;border:none;background:linear-gradient(45deg,#ff4d8d,#ff9bd5,#ffd93d);color:#fff;font-size:clamp(1rem,3.5vw,1.2rem);font-weight:700;cursor:pointer;transition:all 0.4s;box-shadow:0 8px 25px rgba(255,77,141,0.4);position:relative;overflow:hidden;display:block;width:90%;max-width:350px;}
         .btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 15px 35px rgba(255,77,141,0.6);}
         .btn:active{transform:translateY(-1px);}
         
-        .progress{display:flex;gap:10px;margin:20px 0;justify-content:center;}
+        .progress{display:flex;gap:10px;margin:20px 0;justify-content:center;flex-wrap:wrap;}
         .progress-dot{width:12px;height:12px;border-radius:50%;background:#ff6b9d;transition:all 0.3s;}
         .progress-dot.active{transform:scale(1.5);background:#ffd93d;box-shadow:0 0 15px #ffd93d;}
+        
+        /* MOBILE FIXES */
+        @media (max-height: 650px) {
+            .container{padding:10px;}
+            .stage{min-height:60vh;padding:15px;}
+            .title{margin-bottom:5px;}
+            .name{margin:8px 0;}
+            .btn{margin:15px auto !important;padding:14px 25px;width:95% !important;}
+            .card{padding:20px;margin:10px auto;}
+        }
+        
+        @media (max-height: 500px) {
+            body{overflow-y:auto;}
+            .container{min-height:auto;padding:10px 15px;}
+            .stage{min-height:auto;padding:10px;}
+            .btn{padding:12px 20px;width:100% !important;margin:10px auto !important;}
+        }
         
         @keyframes glow{0%{filter:drop-shadow(0 0 10px #ff6b9d);}100%{filter:drop-shadow(0 0 30px #ffd93d);}}
         @keyframes fadeInUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
@@ -54,18 +72,18 @@
             <div class="title">🎉 Happy Birthday 🎉</div>
             <div class="name">Fiza Ahmad 💖</div>
             <div class="card fade-in">
-                <div style="font-size:1.3rem;">Alhamdulillah! Another beautiful year of Allah's blessings ✨</div>
+                <div style="font-size:clamp(1.1rem,3vw,1.3rem);">Alhamdulillah! Another beautiful year of Allah's blessings ✨</div>
             </div>
             <button class="btn fade-in" onclick="nextStage(2)">🌟 Begin Special Prayers 🌟</button>
         </div>
 
-        <!-- Stage 2-5: Prayers -->
+        <!-- Prayers Stages (2-5) -->
         <div id="stage2" class="stage">
             <div class="progress">
                 <div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div>
             </div>
             <div class="card arabic fade-in">اللَّهُمَّ بَارِكْ لَهَا فِي عُمْرِهَا وَارْزُقْهَا الصِّحَّةَ وَالْعَافِيَةَ</div>
-            <div class="card fade-in" style="font-size:1.1rem;color:#ffd93d;">Allahumma barik laha fi umriha warzuqha as-sihhata wal afiyah<br><small>*O Allah! Bless her in her lifetime and grant her health & well-being*</small></div>
+            <div class="card fade-in" style="font-size:clamp(1rem,2.5vw,1.1rem);color:#ffd93d;">Allahumma barik laha fi umriha warzuqha as-sihhata wal afiyah<br><small>*O Allah! Bless her in her lifetime and grant her health & well-being*</small></div>
             <button class="btn fade-in" onclick="nextStage(3)">الصَّلَاةُ الْأُولَى ➜</button>
         </div>
 
@@ -74,7 +92,7 @@
                 <div class="progress-dot"></div><div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div>
             </div>
             <div class="card arabic fade-in">رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ</div>
-            <div class="card fade-in" style="font-size:1.1rem;color:#ffd93d;">Rabbana hablana min azwajina wa dhurriyyatina qurrata a’yunin<br><small>*Our Lord! Grant us from our spouses & offspring comfort to our eyes*</small></div>
+            <div class="card fade-in" style="font-size:clamp(1rem,2.5vw,1.1rem);color:#ffd93d;">Rabbana hablana min azwajina wa dhurriyyatina qurrata a’yunin<br><small>*Our Lord! Grant us from our spouses & offspring comfort to our eyes*</small></div>
             <button class="btn fade-in" onclick="nextStage(4)">الصَّلَاةُ الثَّانِيَة ➜</button>
         </div>
 
@@ -83,7 +101,7 @@
                 <div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot active"></div><div class="progress-dot"></div>
             </div>
             <div class="card arabic fade-in">وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا</div>
-            <div class="card fade-in" style="font-size:1.1rem;color:#ffd93d;">Waj'alna lil-muttaqina imama<br><small>*And make us leaders for the righteous*</small></div>
+            <div class="card fade-in" style="font-size:clamp(1rem,2.5vw,1.1rem);color:#ffd93d;">Waj'alna lil-muttaqina imama<br><small>*And make us leaders for the righteous*</small></div>
             <button class="btn fade-in" onclick="nextStage(5)">الصَّلَاةُ الثَّالِثَة ➜</button>
         </div>
 
@@ -92,24 +110,26 @@
                 <div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot active"></div>
             </div>
             <div class="card arabic fade-in">رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ</div>
-            <div class="card fade-in" style="font-size:1.1rem;color:#ffd93d;">Rabbanagh fir lana wa li-ikhwanina alladhina sabaquna bil-iman<br><small>*Our Lord! Forgive us & those who preceded us in faith*</small></div>
+            <div class="card fade-in" style="font-size:clamp(1rem,2.5vw,1.1rem);color:#ffd93d;">Rabbanagh fir lana wa li-ikhwanina alladhina sabaquna bil-iman<br><small>*Our Lord! Forgive us & those who preceded us in faith*</small></div>
             <button class="btn fade-in" onclick="showFinalMessage()">الصَّلَاةُ الرَّابِعَة ➜ الرِّسَالَةُ الْخَاصَّة</button>
         </div>
 
-        <!-- Stage 6: Final Message -->
+        <!-- Stage 6: Final Message (FIXED) -->
         <div id="stage6" class="stage">
-            <div class="title" style="font-size:2rem;">💌 Special Message for Fiza 💌</div>
-            <div class="card" style="max-width:550px;padding:35px;font-size:1.15rem;line-height:1.7;">
-                <div style="color:#ffd93d;font-weight:700;font-size:1.3rem;margin-bottom:15px;">Dear Fiza,</div>
+            <div class="title" style="font-size:clamp(1.5rem,4vw,2rem);">💌 Special Message for Fiza 💌</div>
+            <div class="card" style="max-width:95vw;padding:30px;font-size:clamp(1rem,3vw,1.15rem);line-height:1.6;max-height:50vh;overflow-y:auto;">
+                <div style="color:#ffd93d;font-weight:700;font-size:clamp(1.1rem,4vw,1.3rem);margin-bottom:15px;">Dear Fiza,</div>
                 <div>Ya Allah ki sab se khoobsurat niyamaton mein se ek niyamat ho tum! 🎁</div>
                 <div>Jis din tum is duniya mein aayi, us din se har pal khubsurat ho gaya. Tumhari muskurahat mein jannat ki roshni hai, tumhare dil mein samundar ki gehraai hai.</div>
-                <div><strong>Tumhari 4 khuwahishen:</strong></div>
-                <div style="margin:15px 0;color:#ff9bd5;font-weight:600;">✨ Har dua qubool ho • Har khwab haqeeqat ban jaye</div>
-                <div style="color:#ff9bd5;font-weight:600;">✨ Sehat hamesha saath rahe • Khushiyan kabhi na chhutein</div>
-                <div style="margin:20px 0;font-style:italic;color:#fff;font-size:1rem;">"Tum jaisi ladkiyan Allah ke karam hoti hain... dil se dua hai ke tum hamesha khush raho!"</div>
-                <div style="margin-top:25px;color:#ffd93d;font-weight:700;">Happy Birthday, meri jaan! 🥰🎂</div>
+                <div style="margin:15px 0;"><strong><span style="color:#ff9bd5;">Meri 4 Khuwahishen:</span></strong></div>
+                <div style="margin:10px 0;color:#ff9bd5;font-weight:600;">✨ Har dua qubool ho</div>
+                <div style="margin:10px 0;color:#ff9bd5;font-weight:600;">✨ Har khwab haqeeqat ban jaye</div>
+                <div style="margin:10px 0;color:#ff9bd5;font-weight:600;">✨ Sehat hamesha saath rahe</div>
+                <div style="margin:10px 0;color:#ff9bd5;font-weight:600;">✨ Khushiyan kabhi na chhutein</div>
+                <div style="margin:20px 0;font-style:italic;color:#fff;font-size:clamp(0.95rem,2.8vw,1rem);">"Tum jaisi ladkiyan Allah ke karam hoti hain... dil se dua hai ke tum hamesha khush raho!"</div>
+                <div style="margin-top:25px;color:#ffd93d;font-weight:700;font-size:clamp(1.1rem,4vw,1.3rem);">Happy Birthday, meri jaan! 🥰🎂</div>
             </div>
-            <button class="btn" onclick="startCelebration()">🎊 Celebrate Together! 🎊</button>
+            <button class="btn" onclick="startCelebration()" style="width:95% !important;margin-top:15px !important;">🎊 Celebrate Together! 🎊</button>
         </div>
     </div>
 
@@ -121,6 +141,7 @@
             currentStage = stageNum;
             document.getElementById(`stage${currentStage}`).classList.add('active');
             updateProgress();
+            window.scrollTo(0, 0); // Scroll to top on stage change
         }
         
         function updateProgress() {
@@ -136,7 +157,6 @@
         function startCelebration() {
             document.getElementById('music').play().catch(e => console.log('Audio play failed'));
             
-            // Epic Confetti
             for(let i=0; i<150; i++) {
                 setTimeout(() => {
                     let c = document.createElement('div');

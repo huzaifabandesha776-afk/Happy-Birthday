@@ -8,7 +8,9 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: linear-gradient(45deg, #1a0033, #330066, #000);
+            background: linear-gradient(-45deg, #1a0033, #330066, #ff6b9d, #ffd93d);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
             color: white;
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
@@ -20,38 +22,55 @@
             overflow-x: hidden;
         }
         
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
         .container { max-width: 500px; width: 100%; }
         .title {
             font-size: clamp(2rem, 8vw, 4rem);
             font-weight: 800;
-            background: linear-gradient(45deg, #ff6b9d, #ffd93d, #ff6b9d);
+            background: linear-gradient(45deg, #ff6b9d, #ffd93d, #ff9bd5);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 20px;
             animation: glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 30px rgba(255,255,255,0.5);
         }
         
         .name {
             font-size: clamp(2rem, 7vw, 3.5rem);
-            color: #ff5fa2;
+            background: linear-gradient(45deg, #ff5fa2, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             font-weight: 800;
             margin: 20px 0;
-            text-shadow: 0 0 20px rgba(255,95,162,0.8);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
         
         .card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(20px);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(25px);
             border-radius: 25px;
-            padding: 30px 20px;
+            padding: 30px 25px;
             margin: 20px auto;
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
         }
-        
-        .btn {
-            padding: 18px 40px;
-            border: none;
-            border-radius: 50px;
-            background: linear-gradient(45deg, #ff4d8d, #ff9b
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;

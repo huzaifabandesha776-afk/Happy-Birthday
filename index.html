@@ -8,56 +8,33 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
         body{
-            background: linear-gradient(-45deg, #1a0033 0%, #330066 25%, #ff6b9d 50%, #ffd93d 75%, #ff9bd5 100%);
+            background: linear-gradient(-45deg, #000428 0%, #004e92 25%, #1a0033 50%, #330066 75%);
             background-size: 400% 400%;
-            animation: gradientShift 10s ease infinite;
+            animation: gradientShift 12s ease infinite;
             color:#fff;
             min-height:100vh;
             overflow-x:hidden;
         }
         @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
         
-        .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,rgba(0,0,0,0.3)0%,rgba(0,0,0,0.7)100%);z-index:1;}
+        .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,rgba(0,0,0,0.4)0%,rgba(0,0,0,0.8)100%);z-index:1;}
         
         .container{padding:15px;position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
         
         .title{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;background:linear-gradient(45deg,#ff6b9d,#ffd93d,#ff6b9d);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:glow 3s ease-in-out infinite alternate;margin-bottom:10px;}
         .name{font-size:clamp(2rem,7vw,3.5rem);color:#ff5fa2;margin:10px 0;text-shadow:0 0 20px rgba(255,95,162,0.8);font-weight:800;line-height:1.1;}
         
-        .eyes{font-size:clamp(3rem,10vw,5rem);margin:20px 0;animation:blink 4s infinite;}
-        @keyframes blink{0%,90%,100%{transform:scaleY(1);}95%{transform:scaleY(0.2);}}
+        .eyes{font-size:clamp(3rem,12vw,6rem);margin:20px 0;animation:blink 3s infinite;}
+        @keyframes blink{0%,90%,100%{transform:scaleY(1);}95%{transform:scaleY(0.1);}}
         
         .stage{display:none;flex-direction:column;justify-content:center;align-items:center;min-height:70vh;padding:20px;}
         .stage.active{display:flex;}
         
-        .card{background:linear-gradient(145deg,rgba(255,255,255,0.2),rgba(255,255,255,0.05));backdrop-filter:blur(20px);border-radius:25px;padding:25px;margin:15px auto;max-width:90vw;width:100%;border:1px solid rgba(255,255,255,0.3);box-shadow:0 20px 40px rgba(0,0,0,0.4);}
+        .card{background:linear-gradient(145deg,rgba(255,255,255,0.15),rgba(255,255,255,0.05));backdrop-filter:blur(20px);border-radius:25px;padding:25px;margin:15px auto;max-width:90vw;width:100%;border:1px solid rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(0,0,0,0.4);}
         .card.arabic{font-family:'Noto Naskh Arabic',serif;font-size:clamp(1.4rem,4vw,1.8rem);line-height:1.6;color:#fff8dc;text-shadow:1px 1px 2px rgba(0,0,0,0.5);}
         
-        .btn{margin:20px auto;padding:16px 35px;border-radius:50px;border:none;background:linear-gradient(45deg,#ff4d8d,#ff9bd5,#ffd93d);color:#fff;font-size:clamp(1rem,3.5vw,1.2rem);font-weight:700;cursor:pointer;transition:all 0.4s;box-shadow:0 8px 25px rgba(255,77,141,0.4);display:block;width:90%;max-width:350px;}
+        .btn{margin:20px auto;padding:16px 35px;border-radius:50px;border:none;background:linear-gradient(45deg,#ff4d8d,#ff9bd5,#ffd93d);color:#fff;font-size:clamp(1rem,3.5vw,1.2rem);font-weight:700;cursor:pointer;transition:all 0.4s;box-shadow:0 8px 25px rgba(255,77,141,0.4);position:relative;overflow:hidden;display:block;width:90%;max-width:350px;}
         .btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 15px 35px rgba(255,77,141,0.6);}
         .btn:active{transform:translateY(-1px);}
         
-        .progress{display:flex;gap:10px;margin:20px 0;justify-content:center;flex-wrap:wrap;}
-        .progress-dot{width:12px;height:12px;border-radius:50%;background:#ff6b9d;transition:all 0.3s;}
-        .progress-dot.active{transform:scale(1.5);background:#ffd93d;box-shadow:0 0 15px #ffd93d;}
-        
-        /* MOBILE FIXES */
-        @media (max-height: 650px) {.container{padding:10px;}.stage{min-height:60vh;padding:15px;}.title{margin-bottom:5px;}.name{margin:8px 0;}.btn{width:95% !important;}.card{padding:20px;margin:10px auto;}}
-        @media (max-height: 500px) {body{overflow-y:auto;}.container{min-height:auto;padding:10px 15px;}.stage{min-height:auto;padding:10px;}.btn{width:100% !important;}}
-        
-        @keyframes glow{0%{filter:drop-shadow(0 0 10px #ff6b9d);}100%{filter:drop-shadow(0 0 30px #ffd93d);}}
-        @keyframes fadeInUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-        .fade-in{animation:fadeInUp 0.8s ease-out;}
-        
-        .confetti{position:fixed;width:12px;height:12px;top:-12px;z-index:20;animation:fall 4s linear forwards;}
-        @keyframes fall{to{transform:translateY(120vh) rotate(720deg);}}
-    </style>
-</head>
-<body>
-    <div class="overlay"></div>
-
-    <audio id="music" loop preload="auto">
-        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
-    </audio>
-
-    <div
+        .progress{dis
